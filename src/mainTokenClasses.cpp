@@ -105,10 +105,29 @@ int main() {
 			rv = 1;
 		}
 	}
+	/**
+	 * 	It’s a logic error if you place a base-class catch
+	 *  handler before one that catches one of that base
+	 *  class’s derived types——compilers will issue a warning
+	 *  for this. The base-class catch  matches all objects
+	 *  of classes derived publicly from that base class,
+	 *  so the derived-class catch will never execute.
+	 */
+	/**
+	 *  Base class for all library exceptions.
+	 *  Catching type "exception" is not guaranteed to
+	 *  catch all exceptions a program could encounter.
+	 */
 	catch (exception& e){
 		cout << "Exception caught in main(): " << e.what() << endl;
 		rv = 3;
 	}
+	/**
+	 * Catches all exception types.
+	 * The type of the caught exception is unknown.
+	 * Without a named parameter, you cannot refer to the exception object
+	 * inside the exception handler.
+	 */
 	catch (...) {
 		cout << "Unknown exception caught in main() " << endl;
 		rv = 4;
